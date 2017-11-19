@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://35.197.99.197:3306/movie</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">potatoes</property>
+
+        <!-- List of XML mapping files -->
+        <mapping class="Entities.Acts_In"/>
+        <mapping class="Entities.Directs"/>
+        <mapping class="Entities.Episode"/>
+        <mapping class="Entities.Finances"/>
+        <mapping class="Entities.Genre"/>
+        <mapping class="Entities.Known_For"/>
+        <mapping class="Entities.Person"/>
+        <mapping class="Entities.Primary_Profession"/>
+        <mapping class="Entities.Production"/>
+        <mapping class="Entities.Ratings"/>
+        <mapping class="Entities.Known_For"/>
+
+    </session-factory>
+</hibernate-configuration>
