@@ -23,7 +23,8 @@ public class QueryEngine {
         }
 
         try (Session session = factory.openSession()) {
-            session.createQuery(createPersonTable);
+            //session.createSQLQuery(testTable);
+            session.createQuery("Insert into Test(123, pizza)");
 //            System.out.println("");
 //            Stream result = session.createQuery(createPersonTable).getResultStream();
 //
@@ -41,11 +42,127 @@ public class QueryEngine {
         factory.close();
     }
 
-    private static String createPersonTable = "CREATE TABLE IF NOT EXISTS PERSON (" +
+    private static final String testTable = "CREATE TABLE Test (\n" +
+            "id int," +
+            "foo varchar(16)" +
+            ");";
+
+    private static final String createPersonTable = "CREATE TABLE IF NOT EXISTS Person (\n" +
+            "nConst VARCHAR(16) NOT NULL,\n" +
+            "primaryName VARCHAR(108) NULL,\n" +
+            "birthYear INT NULL,\n" +
+            "deathYear INT NULL,\n" +
+            "PRIMARY KEY (nConst),\n" +
+            "INDEX nConst (nConst ASC));";
+
+    private static final String createProductionTable = "CREATE TABLE IF NOT EXISTS Production (" +
+            "tConst VARCHAR(16) NOT NULL," +
+            "titleType VARCHAR(20) NOT NULL," +
+            "primaryTitle VARCHAR(96) NULL," +
+            "originalTitle VARCHAR(96) NULL," +
+            "adult TINYINT(1) NULL," +
+            "startYear INT NULL," +
+            "endYear INT NULL," +
+            "runtime FLOAT NULL," +
+            "PRIMARY KEY (tConst)," +
+            "INDEX tConst (tConst ASC);";
+
+    private static final String createEpisodeTable = "CREATE TABLE IF NOT EXISTS Episode (" +
+            "tConst VARCHAR(16) NOT NULL," +
+            "parentTConst VARCHAR(16) NOT NULL," +
+            "seasonNumber INT NULL," +
+            "episodeNumber INT NULL," +
+            "PRIMARY KEY (tConst)," +
+            "INDEX tConst (tConst ASC)," +
+            "CONSTRAINT tConstEFK FOREIGN KEY (tConst)" +
+            "REFERENCES Production (tConst)" +
+            "ON DELETE CASCADE ON UPDATE NO ACTION," +
+            "CONSTRAINT parentTConstFK FOREIGN KEY (parentTConst)" +
+            "REFERENCES Production (tConst)" +
+            "ON DELETE CASCADE ON UPDATE NO ACTION);";
+
+    private static final String createKnownForTable = "CREATE TABLE IF NOT EXISTS Known_For (" +
             "nConst VARCHAR(16) NOT NULL," +
-            "primaryName VARCHAR(108) NULL," +
-            "birthYear INT NULL," +
-            "deathYear INT NULL," +
-            "PRIMARY KEY (nConst)," +
-            "INDEX nConst (nConst ASC)";
+            "title VARCHAR(45) NOT NULL," +
+            "PRIMARY KEY (nConst , title)," +
+            "INDEX nConst (nConst ASC)," +
+            "CONSTRAINT nConstKnownForFK FOREIGN KEY (nConst)" +
+            "REFERENCES Person (nConst)" +
+            "ON DELETE SET NULL ON UPDATE NO ACTION);";
+
+    private static final String createPrimaryProfessionTable = "CREATE TABLE IF NOT EXISTS Primary_Profession (" +
+            "nConst VARCHAR(16) NOT NULL," +
+            "profession VARCHAR(32) NOT NULL," +
+            "PRIMARY KEY (nConst , profession)," +
+            "INDEX nConst (nConst ASC)," +
+            "CONSTRAINT nConstProfessionFK FOREIGN KEY (nConst)" +
+            "REFERENCES Person (nConst)" +
+            "ON DELETE SET NULL ON UPDATE NO ACTION);";
+
+    private static final String createGenreTable = "CREATE TABLE IF NOT EXISTS Genre (" +
+            "tConst VARCHAR(16) NOT NULL," +
+            "genre VARCHAR(16) NOT NULL," +
+            "PRIMARY KEY (tConst , genre)," +
+            "INDEX tConst (tConst ASC)," +
+            "CONSTRAINT tConstGenreFK FOREIGN KEY (tConst)" +
+            "REFERENCES Production (tConst)" +
+            "ON DELETE SET NULL ON UPDATE NO ACTION);";
+
+    private static final String createRatingsTable = "CREATE TABLE IF NOT EXISTS Ratings (" +
+            "tConst VARCHAR(16) NOT NULL," +
+            "averageRating FLOAT NULL," +
+            "numVotes INT NULL," +
+            "PRIMARY KEY (tConst)," +
+            "INDEX tConst (tConst ASC)," +
+            "CONSTRAINT tConstRatingsFK FOREIGN KEY (tConst)" +
+            "REFERENCES Production (tConst)" +
+            "ON DELETE SET NULL ON UPDATE NO ACTION);";
+
+    private static final String createFinancesTable = "CREATE TABLE IF NOT EXISTS Finances (" +
+            "tConst VARCHAR(16) NOT NULL," +
+            "budget FLOAT NULL," +
+            "revenue FLOAT NULL," +
+            "PRIMARY KEY (tConst)," +
+            "INDEX tConst (tConst ASC)," +
+            "CONSTRAINT tConstFinancesFK FOREIGN KEY (tConst)" +
+            "REFERENCES Production (tConst)" +
+            "ON DELETE SET NULL ON UPDATE NO ACTION);";
+
+    private static final String createActsInTable = "CREATE TABLE IF NOT EXISTS Acts_In (" +
+            "nConst VARCHAR(16) NOT NULL," +
+            "tConst VARCHAR(16) NOT NULL," +
+            "PRIMARY KEY (nConst , tConst)," +
+            "INDEX tConst_idx (tConst ASC)," +
+            "CONSTRAINT nConstActsInFK FOREIGN KEY (nConst)" +
+            "REFERENCES Person (nConst)" +
+            "ON DELETE NO ACTION ON UPDATE NO ACTION," +
+            "CONSTRAINT tConstActsInFK FOREIGN KEY (tConst)" +
+            "REFERENCES Production (tConst)" +
+            "ON DELETE NO ACTION ON UPDATE NO ACTION);";
+
+    private static final String createDirectsTable = "CREATE TABLE IF NOT EXISTS DIRECTS (" +
+            "nConst VARCHAR(16) NOT NULL," +
+            "tConst VARCHAR(16) NOT NULL," +
+            "PRIMARY KEY (nConst , tConst)," +
+            "INDEX tConst_idx (tConst ASC)," +
+            "CONSTRAINT nConstDirectsFK FOREIGN KEY (nConst)" +
+            "REFERENCES Person (nConst)" +
+            "ON DELETE NO ACTION ON UPDATE NO ACTION," +
+            "CONSTRAINT tConstDirectsFK FOREIGN KEY (tConst)" +
+            "REFERENCES Production (tConst)" +
+            "ON DELETE NO ACTION ON UPDATE NO ACTION);";
+
+    private static final String createWritesTable = "CREATE TABLE IF NOT EXISTS WRITES (" +
+            "nConst VARCHAR(16) NOT NULL," +
+            "tConst VARCHAR(16) NOT NULL," +
+            "PRIMARY KEY (nConst , tConst)," +
+            "INDEX tConst_idx (tConst ASC)," +
+            "CONSTRAINT nConstWritesFK FOREIGN KEY (nConst)" +
+            "REFERENCES Person (nConst)" +
+            "ON DELETE NO ACTION ON UPDATE NO ACTION," +
+            "CONSTRAINT tConstWritesFK FOREIGN KEY (tConst)" +
+            "REFERENCES Production (tConst)" +
+            "ON DELETE NO ACTION ON UPDATE NO ACTION);";
+
+
 }
