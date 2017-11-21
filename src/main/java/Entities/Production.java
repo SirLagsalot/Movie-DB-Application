@@ -1,11 +1,13 @@
 package Entities;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
 
 @Table(name = "Production")
 public class Production extends Entity {
 
+    @Id
     private String tConst;
     private String titleType;
     private String primaryTitle;

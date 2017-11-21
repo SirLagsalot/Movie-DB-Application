@@ -1,11 +1,13 @@
 package Entities;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
 
 @Table(name = "Person")
 public class Person extends Entity {
 
+    @Id
     private String nConst;
     private String primaryName;
     private Date birthYear;

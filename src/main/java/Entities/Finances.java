@@ -1,10 +1,12 @@
 package Entities;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "Finances")
 public class Finances extends Entity {
 
+    @Id
     private String tConst;
     private float budget;
     private float revenue;

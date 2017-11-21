@@ -1,9 +1,12 @@
+import Entities.TestTable;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 public class QueryEngine {
 
@@ -13,6 +16,9 @@ public class QueryEngine {
     public static void main(String[] args) {
 
         try {
+//            Configuration cfg = new Configuration();
+//            cfg.configure("hibernate.cfg.xml");
+//            factory = cfg.buildSessionFactory();
             StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
             Metadata metaData = new MetadataSources(standardRegistry).getMetadataBuilder().build();
             factory = metaData.getSessionFactoryBuilder().build();
@@ -23,20 +29,16 @@ public class QueryEngine {
         }
 
         try (Session session = factory.openSession()) {
-            //session.createSQLQuery(testTable);
-            session.createQuery("Insert into Test(123, pizza)");
-//            System.out.println("");
-//            Stream result = session.createQuery(createPersonTable).getResultStream();
-//
-//            List<String> stringResults = (List<String>) result.collect(Collectors.toList());
-//
-//            for (Entity entity : stringResults) {
-//                System.out.println(entity.toString());
-//                System.out.println("");
-//            }
-//            System.out.println("");
-        } catch (Exception e) {
-            e.printStackTrace();
+            Transaction t = session.beginTransaction();
+            TestTable e1 = new TestTable();
+            e1.setId(115);
+            e1.setFirstName("foo");
+            e1.setLastName("bar");
+            session.persist(e1);
+            t.commit();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         factory.close();
@@ -163,6 +165,4 @@ public class QueryEngine {
             "CONSTRAINT tConstWritesFK FOREIGN KEY (tConst)" +
             "REFERENCES Production (tConst)" +
             "ON DELETE NO ACTION ON UPDATE NO ACTION);";
-
-
 }

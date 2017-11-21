@@ -1,10 +1,12 @@
 package Entities;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "Episode")
 public class Episode extends Entity {
 
+    @Id
     private String tConst;
     private String parentTConst;
     private int seasonNumber;

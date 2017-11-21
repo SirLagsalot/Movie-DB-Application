@@ -1,10 +1,12 @@
 package Entities;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "Ratings")
 public class Ratings extends Entity {
 
+    @Id
     private String tConst;
     private float avgRating;
     private int numVotes;

@@ -1,11 +1,14 @@
 package Entities;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "Acts_In")
 public class Acts_In extends Entity {
 
+    @Id
     private String nConst;
+    @Id
     private String tConst;
 
     public String getNConst() {

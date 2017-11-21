@@ -1,11 +1,14 @@
 package Entities;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "Directs")
 public class Directs extends Entity {
 
+    @Id
     private String nConst;
+    @Id
     private String tConst;
 
     public String getNConst() {

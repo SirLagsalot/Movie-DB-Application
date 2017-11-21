@@ -1,10 +1,12 @@
 package Entities;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "Primary_Profession")
 public class Primary_Profession extends Entity {
 
+    @Id
     private String nConst;
     private String profession;
 
