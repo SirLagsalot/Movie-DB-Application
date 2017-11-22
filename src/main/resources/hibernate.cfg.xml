@@ -5,6 +5,8 @@
 
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
+
         <property name="hibernate.connection.url">jdbc:mysql://35.197.99.197:3306/movie</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">potatoes</property>
