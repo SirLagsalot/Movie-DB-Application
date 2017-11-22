@@ -12,7 +12,6 @@
         <property name="hibernate.connection.password">potatoes</property>
 
         <!-- List of XML mapping files -->
-        <mapping class="Entities.TestTable"/>
         <mapping class="Entities.Acts_In"/>
         <mapping class="Entities.Directs"/>
         <mapping class="Entities.Episode"/>
