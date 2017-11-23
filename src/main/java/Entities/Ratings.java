@@ -1,14 +1,18 @@
 package Entities;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "Ratings")
-public class Ratings extends Entity {
+public class Ratings {
 
     @Id
+    @Column(name = "tConst")
     private String tConst;
+    @Column(name = "avgRating")
     private float avgRating;
+    @Column(name = "numVotes")
     private int numVotes;
 
     public String getTConst() {

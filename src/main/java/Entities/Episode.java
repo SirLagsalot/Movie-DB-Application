@@ -1,15 +1,21 @@
 package Entities;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Table(name = "Episode")
-public class Episode extends Entity {
+public class Episode {
 
     @Id
+    @Column(name = "tConst")
     private String tConst;
+    @Column(name = "parentTConst")
     private String parentTConst;
+    @Column(name = "seasonNumber")
     private int seasonNumber;
+    @Column(name = "episodeNumber")
     private int episodeNumber;
 
     public String getTConst() {

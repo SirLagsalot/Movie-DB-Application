@@ -1,14 +1,18 @@
 package Entities;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Table(name = "Acts_In")
-public class Acts_In extends Entity {
+public class Acts_In implements Serializable{
 
     @Id
+    @Column(name = "nConst")
     private String nConst;
     @Id
+    @Column(name = "tConst")
     private String tConst;
 
     public String getNConst() {

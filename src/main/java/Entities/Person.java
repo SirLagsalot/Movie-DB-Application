@@ -1,17 +1,23 @@
 package Entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Date;
 
+@Entity
 @Table(name = "Person")
-public class Person extends Entity {
+public class Person {
 
     @Id
+    @Column(name = "nConst")
     private String nConst;
+    @Column(name = "primaryName")
     private String primaryName;
-    private Date birthYear;
-    private Date deathYear;
+    @Column(name = "birthYear")
+    private Integer birthYear;
+    @Column(name = "deathYear")
+    private Integer deathYear;
 
     public String getNConst() {
         return nConst;
@@ -29,20 +35,24 @@ public class Person extends Entity {
         this.primaryName = primaryName;
     }
 
-    public Date getBirthYear() {
+    public Integer getBirthYear() {
         return birthYear;
     }
 
-    public void setBirthYear(Date birthYear) {
+    public void setBirthYear(Integer birthYear) {
         this.birthYear = birthYear;
     }
 
-    public Date getDeathYear() {
+    public Integer getDeathYear() {
         return deathYear;
     }
 
-    public void setDeathYear(Date deathYear) {
+    public void setDeathYear(Integer deathYear) {
         this.deathYear = deathYear;
+    }
+
+    public String toString() {
+        return "nConst=" + nConst + ",primaryName=" + primaryName + ",birthYear=" + birthYear + ",deathYear=" + deathYear;
     }
 }
 

@@ -1,13 +1,16 @@
 package Entities;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "Genre")
-public class Genre extends Entity {
+public class Genre {
 
     @Id
+    @Column(name = "tConst")
     private String tConst;
+    @Column(name = "genre")
     private String genre;
 
     public String getTConst() {

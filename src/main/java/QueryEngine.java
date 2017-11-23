@@ -1,3 +1,4 @@
+import Entities.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -16,9 +17,13 @@ public class QueryEngine {
         configureSessionFactory();
 
         try (Session session = factory.openSession()) {
-            Query query = session.createQuery("select count (*) from Entities.Person");
-            List list = query.list();
-            System.out.println(list.size());
+            Query query = session.createQuery("from Entities.Person where deathYear=0 order by primaryName asc").setMaxResults(100);
+            List<Person> list = (List<Person>) query.list();
+
+            for (Person person : list) {
+                System.out.println(person.toString());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

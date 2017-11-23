@@ -1,20 +1,29 @@
 package Entities;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
 
 @Table(name = "Production")
-public class Production extends Entity {
+public class Production {
 
     @Id
+    @Column(name = "tConst")
     private String tConst;
+    @Column(name = "titleType")
     private String titleType;
+    @Column(name = "primaryTitle")
     private String primaryTitle;
+    @Column(name = "originalTitle")
     private String originalTitle;
+    @Column(name = "adult")
     private boolean adult;
+    @Column(name = "startYear")
     private Date startYear;
+    @Column(name = "endYear")
     private Date endYear;
+    @Column(name = "runtime")
     private float runtime;
 
     public String getTConst() {

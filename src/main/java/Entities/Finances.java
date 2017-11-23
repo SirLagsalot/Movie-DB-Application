@@ -1,14 +1,19 @@
 package Entities;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Table(name = "Finances")
-public class Finances extends Entity {
+public class Finances {
 
     @Id
+    @Column(name = "tConst")
     private String tConst;
+    @Column(name = "budget")
     private float budget;
+    @Column(name = "revenue")
     private float revenue;
 
 
