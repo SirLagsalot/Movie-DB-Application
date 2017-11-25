@@ -4,10 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "Person")
-public class Person {
+public class Person implements Serializable {
 
     @Id
     @Column(name = "nConst")
@@ -52,7 +53,10 @@ public class Person {
     }
 
     public String toString() {
-        return "nConst=" + nConst + ",primaryName=" + primaryName + ",birthYear=" + birthYear + ",deathYear=" + deathYear;
+        return ("Id: " + this.nConst)
+                .concat(", Name: " + this.primaryName)
+                .concat(", BirthYear: " + this.birthYear)
+                .concat(", DeathYear: " + this.deathYear);
     }
 }
 

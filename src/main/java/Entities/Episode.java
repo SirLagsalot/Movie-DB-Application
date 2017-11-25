@@ -1,12 +1,14 @@
 package Entities;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+@Entity
 @Table(name = "Episode")
-public class Episode {
+public class Episode implements Serializable {
 
     @Id
     @Column(name = "tConst")
@@ -14,9 +16,9 @@ public class Episode {
     @Column(name = "parentTConst")
     private String parentTConst;
     @Column(name = "seasonNumber")
-    private int seasonNumber;
+    private Integer seasonNumber;
     @Column(name = "episodeNumber")
-    private int episodeNumber;
+    private Integer episodeNumber;
 
     public String getTConst() {
         return tConst;
@@ -34,19 +36,27 @@ public class Episode {
         this.parentTConst = parentTConst;
     }
 
-    public int getSeasonNumber() {
+    public Integer getSeasonNumber() {
         return seasonNumber;
     }
 
-    public void setSeasonNumber(int seasonNumber) {
+    public void setSeasonNumber(Integer seasonNumber) {
         this.seasonNumber = seasonNumber;
     }
 
-    public int getEpisodeNumber() {
+    public Integer getEpisodeNumber() {
         return episodeNumber;
     }
 
-    public void setEpisodeNumber(int episodeNumber) {
+    public void setEpisodeNumber(Integer episodeNumber) {
         this.episodeNumber = episodeNumber;
+    }
+
+    @Override
+    public String toString() {
+        return ("EpisodeId: " + this.tConst)
+                .concat(", SeriesId: " + this.parentTConst)
+                .concat(", Season: " + this.seasonNumber)
+                .concat(", Episode: " + this.episodeNumber);
     }
 }

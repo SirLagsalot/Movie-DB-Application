@@ -1,3 +1,4 @@
+import Entities.Finances;
 import Entities.Person;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,10 +18,10 @@ public class QueryEngine {
         configureSessionFactory();
 
         try (Session session = factory.openSession()) {
-            Query query = session.createQuery("from Entities.Person where deathYear=0 order by primaryName asc").setMaxResults(100);
-            List<Person> list = (List<Person>) query.list();
+            Query query = session.createQuery("from Entities.Finances order by tConst asc").setMaxResults(100);
+            List<Finances> list = (List<Finances>) query.list();
 
-            for (Person person : list) {
+            for (Finances person : list) {
                 System.out.println(person.toString());
             }
 

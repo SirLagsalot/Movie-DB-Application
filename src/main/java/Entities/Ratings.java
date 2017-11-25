@@ -1,16 +1,19 @@
 package Entities;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
+@Entity
 @Table(name = "Ratings")
-public class Ratings {
+public class Ratings implements Serializable {
 
     @Id
     @Column(name = "tConst")
     private String tConst;
-    @Column(name = "avgRating")
+    @Column(name = "averageRating")
     private float avgRating;
     @Column(name = "numVotes")
     private int numVotes;
@@ -37,5 +40,10 @@ public class Ratings {
 
     public void setNumVotes(int numVotes) {
         this.numVotes = numVotes;
+    }
+
+    @Override
+    public String toString() {
+        return "Id: ".concat(this.tConst).concat(", Votes: " + this.numVotes).concat(", Rating: " + this.avgRating);
     }
 }

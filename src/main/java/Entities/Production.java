@@ -1,12 +1,14 @@
 package Entities;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Date;
+import java.io.Serializable;
 
+@Entity
 @Table(name = "Production")
-public class Production {
+public class Production implements Serializable {
 
     @Id
     @Column(name = "tConst")
@@ -20,11 +22,11 @@ public class Production {
     @Column(name = "adult")
     private boolean adult;
     @Column(name = "startYear")
-    private Date startYear;
+    private Integer startYear;
     @Column(name = "endYear")
-    private Date endYear;
+    private Integer endYear;
     @Column(name = "runtime")
-    private float runtime;
+    private Float runtime;
 
     public String getTConst() {
         return tConst;
@@ -66,27 +68,35 @@ public class Production {
         this.adult = adult;
     }
 
-    public Date getStartYear() {
+    public Integer getStartYear() {
         return startYear;
     }
 
-    public void setStartYear(Date startYear) {
+    public void setStartYear(Integer startYear) {
         this.startYear = startYear;
     }
 
-    public Date getEndYear() {
+    public Integer getEndYear() {
         return endYear;
     }
 
-    public void setEndYear(Date endYear) {
+    public void setEndYear(Integer endYear) {
         this.endYear = endYear;
     }
 
-    public float getRuntime() {
+    public Float getRuntime() {
         return runtime;
     }
 
-    public void setRuntime(float runtime) {
+    public void setRuntime(Float runtime) {
         this.runtime = runtime;
+    }
+
+    @Override
+    public String toString() {
+        return "Id: ".concat(this.tConst)
+                .concat(", Title: ")
+                .concat(this.primaryTitle)
+                .concat(", Year: " + this.startYear);
     }
 }
