@@ -1,5 +1,4 @@
-import Entities.Finances;
-import Entities.Person;
+import Entities.Production;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -18,10 +17,11 @@ public class QueryEngine {
         configureSessionFactory();
 
         try (Session session = factory.openSession()) {
-            Query query = session.createQuery("from Entities.Finances order by tConst asc").setMaxResults(100);
-            List<Finances> list = (List<Finances>) query.list();
+            Query query = sequels(session);
 
-            for (Finances person : list) {
+            List<Production> list = (List<Production>) query.list();
+
+            for (Production person : list) {
                 System.out.println(person.toString());
             }
 
@@ -31,6 +31,18 @@ public class QueryEngine {
 
         factory.close();
     }
+
+    private static Query crewDiedBeforeRelease(Session session) {
+        return session.createQuery("From Entities.Production join Entities.Person");
+    }
+
+    private static Query sequels(Session session) {
+        return session.createQuery("FROM Entities.Production " +
+                "WHERE primaryTitle LIKE '% 2'\n" +
+                "   OR primaryTitle LIKE '% two'\n").setMaxResults(1000);
+    }
+
+    private static String partOf = "Entities.Person ";
 
     private static void configureSessionFactory() {
         try {
