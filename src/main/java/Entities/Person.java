@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Person")
@@ -57,6 +58,16 @@ public class Person implements Serializable {
                 .concat(", Name: " + this.primaryName)
                 .concat(", BirthYear: " + this.birthYear)
                 .concat(", DeathYear: " + this.deathYear);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj instanceof Person) {
+            Person comparison = (Person) obj;
+            return Objects.equals(comparison.nConst, this.nConst);
+        } else {
+            return false;
+        }
     }
 }
 

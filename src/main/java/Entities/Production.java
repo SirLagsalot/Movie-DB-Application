@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Production")
@@ -98,5 +99,15 @@ public class Production implements Serializable {
                 .concat(", Title: ")
                 .concat(this.primaryTitle)
                 .concat(", Year: " + this.startYear);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj instanceof Production) {
+            Production comparison = (Production) obj;
+            return Objects.equals(comparison.tConst, this.tConst);
+        } else {
+            return false;
+        }
     }
 }

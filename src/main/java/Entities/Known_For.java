@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Known_For")
@@ -36,5 +37,15 @@ public class Known_For implements Serializable {
     @Override
     public String toString() {
         return ("PersonId: " + this.nConst).concat(", ProductionId: " + this.tConst);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj instanceof Known_For) {
+            Known_For comparison = (Known_For) obj;
+            return Objects.equals(comparison.nConst, this.nConst) && Objects.equals(comparison.tConst, this.tConst);
+        } else {
+            return false;
+        }
     }
 }

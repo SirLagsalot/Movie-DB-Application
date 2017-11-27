@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Episode")
@@ -58,5 +59,15 @@ public class Episode implements Serializable {
                 .concat(", SeriesId: " + this.parentTConst)
                 .concat(", Season: " + this.seasonNumber)
                 .concat(", Episode: " + this.episodeNumber);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null && obj instanceof Episode) {
+            Episode comparison = (Episode) obj;
+            return Objects.equals(comparison.tConst, this.tConst);
+        } else {
+            return false;
+        }
     }
 }

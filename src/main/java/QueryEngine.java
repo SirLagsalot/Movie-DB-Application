@@ -17,7 +17,7 @@ public class QueryEngine {
         configureSessionFactory();
 
         try (Session session = factory.openSession()) {
-            Query query = sequels(session);
+            Query query = crewDiedBeforeRelease(session);
 
             List<Production> list = (List<Production>) query.list();
 
@@ -33,11 +33,15 @@ public class QueryEngine {
     }
 
     private static Query crewDiedBeforeRelease(Session session) {
-        return session.createQuery("From Entities.Production join Entities.Person");
+        return session.createQuery("FROM Entities.Production");
+
+//        return session.createQuery("SELECT primaryTitle p1, primaryTitle p2 " +
+//                "FROM Entities.Production as p1, Entities.Production as p2 " +
+//                "WHERE p1 !=  LIKE 'p2.primaryTitle%'");
     }
 
     private static Query sequels(Session session) {
-        return session.createQuery("FROM Entities.Production " +
+        return session.createQuery("from Entities.Production " +
                 "WHERE primaryTitle LIKE '% 2'\n" +
                 "   OR primaryTitle LIKE '% two'\n").setMaxResults(1000);
     }
